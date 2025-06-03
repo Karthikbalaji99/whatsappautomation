@@ -1,6 +1,10 @@
 # Implementation & Lessons Learned
 
-Below is a walkthrough of how I built the WhatsApp Campaign Automation System, the challenges I faced along the way, and how I resolved them.
+Below is a walkthrough of how I built the WhatsApp Campaign Automation System, the challenges I faced along the way, and how I resolved them. While I used best practices and some code assistance for formatting, I carefully thought through the retry strategies, mock testing for replies, and UI flow to simulate a real-world ops dashboard. I wanted this to feel production-ready even if it’s just for demo purposes. I wanted to use LLMs and open source models for template logic and not just record the first message but the whole premilinary phase of 
+- sending the first message (not only on interest, but on user profile, their experience, and more features)
+- sending the follow up message (based on the user response)
+- I also wanted to make the whole prelimnary process automated (up until data collection and document collection until one-on-one communication was really necessary)
+
 
 ---
 
@@ -88,13 +92,13 @@ With these two tweaks—atomic replacement and retry-on-read—my Excel file nev
    - You can also manually click “Retry Failed Now” or “Send Follow-ups” to force actions immediately.
 
 2. **Background Monitoring Thread**
- - As soon as the Streamlit app starts, it kicks off a daemon thread that does the following every 30 seconds:
+ - As soon as the Streamlit app starts, it kicks off a background thread that does the following every 30 seconds:
    1. **Update Delivery Status**: For any row with `Delivery_Status = queued`, call `/mock/status/{message_id}`. If the mock returns “sent” or “failed,” update the Excel.
    2. **Retry Failed**: For any row with `Delivery_Status = failed` and `Retry_Count < 5`, if its `Next_Retry_Time <= now`, call `send_message(...)` again, increment `Retry_Count`, set a new `Next_Retry_Time = now + 1 minute`.
    3. **Check for Replies**: For rows where `Delivery_Status = sent` and `Reply_History = []`, and if it’s still within 1 hour of `Message_Sent_Time`, call `/mock/reply/{message_id}`. If a reply appears, append it to `Reply_History`, set `Delivery_Status = success`, and mark `Follow_Up_Status = not_required`.
    4. **Send Follow-Ups**: For rows where `Delivery_Status = sent`, `Reply_History = []`, and `Follow_Up_Status = pending`, if `(now – Message_Sent_Time) >= 10 minutes`, send a follow-up message, record that text in `Followup_Message`, set `Follow_Up_Status = sent`, and write `Follow_Up_Sent_Time`.
 
-Because all read/write actions to the Excel file are done under a single Python `threading.Lock()` and use atomic writes, there are no more file corruption errors—even though multiple operations happen concurrently.
+Because all read/write actions to the Excel file are done under a single Python `threading.Lock()`(this is done to ensure only one thing touches the excel at a time) and use atomic writes, there are no more file corruption errors—even though multiple operations happen concurrently.
 
 ---
 
@@ -178,7 +182,7 @@ If I had two more days, I would:
 - Highlight high-priority leads in the dashboard.
 
 
-**Robust Scheduling & Cron Jobs**
+**Robust Scheduling**
 - Allow campaigns to be scheduled for the future (e.g., “Send at 9 AM tomorrow”).
 - Deploy this system on a server or cloud service so the background thread runs reliably 24/7.
 
@@ -193,3 +197,7 @@ If I had two more days, I would:
 - The Streamlit dashboard ties it all together—upload leads, send a campaign, watch real-time metrics, and download logs.
 
 This system demonstrates a robust, end-to-end approach to automating WhatsApp outreach—complete with retries, follow-ups, and thread-safe Excel logging. It’s designed so that anyone reading the code or documentation can understand each step, how the pieces interact, and why certain design decisions were made.
+
+
+#  AI Usage Disclosure:
+While I used AI tools at times to assist with code formatting, message drafting, and quick testing (e.g. generating placeholder text, debugging pandas issues), this project was entirely driven, structured, and engineered by me. All architectural decisions, design logic, retry/follow-up strategy, and dashboard implementation were thoughtfully planned and built based on real-world scenarios. I take full ownership of the code and its execution.
