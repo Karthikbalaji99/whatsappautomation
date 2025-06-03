@@ -1,0 +1,27 @@
+{
+    "Nursing in Germany": [
+        "Hi {name}! 🌟 Ready to start your nursing career in Germany? BorderPlus can help you with cultural training and placement. Let's discuss your journey! 🇩🇪",
+        "Hello {name}! 👋 Interested in German nursing opportunities? We specialize in preparing Indian nurses for German hospitals. Want to know more?",
+        "Hi {name}! 🏥 Your interest in German nursing caught our attention. BorderPlus offers comprehensive training and support. Ready to take the next step?"
+    ],
+    "Healthcare Training": [
+        "Hi {name}! 📚 Looking for healthcare training? BorderPlus provides specialized courses for international healthcare careers. Let's chat!",
+        "Hello {name}! 🎓 We noticed your interest in healthcare training. Our programs are designed for global opportunities. Interested to learn more?",
+        "Hi {name}! 💼 Ready to advance your healthcare career? BorderPlus offers training that opens international doors. Let's connect!"
+    ],
+    "International Nursing": [
+        "Hi {name}! 🌍 Dreaming of an international nursing career? BorderPlus makes it possible with our specialized training. Ready to explore?",
+        "Hello {name}! ✈️ International nursing opportunities await! We help nurses transition globally with confidence. Want to discuss?",
+        "Hi {name}! 🌟 Your interest in international nursing is exciting! BorderPlus can guide your global career journey. Let's talk!"
+    ],
+    "German Language Course": [
+        "Hi {name}! 🇩🇪 Need German language training? BorderPlus offers healthcare-focused German courses. Perfect for your career goals!",
+        "Hello {name}! 📖 Looking to learn German? Our specialized courses prepare healthcare professionals for German work environments. Interested?",
+        "Hi {name}! 💬 German language skills can transform your career! BorderPlus offers targeted training for healthcare professionals. Let's discuss!"
+    ],
+    "default": [
+        "Hi {name}! 👋 Thanks for your interest in international healthcare careers. BorderPlus can help you achieve your goals. Let's connect!",
+        "Hello {name}! 🌟 Ready to take your healthcare career global? BorderPlus offers the training and support you need. Want to learn more?",
+        "Hi {name}! 💼 Your healthcare career deserves global opportunities. BorderPlus can make it happen. Ready to start your journey?"
+    ]
+}
