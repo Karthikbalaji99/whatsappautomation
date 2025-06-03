@@ -151,7 +151,7 @@ You should see “Mock API Connected” at the top and be able to upload data/le
 - Watch the progress bar as each lead is queued to send.
 - Open data/delivery_log.xlsx in Excel (or let the Streamlit dashboard show it) to see queued rows appear.
 
-**Watch the Magic Happen**
+**What Happens**
 
 - Within 30 seconds, you’ll see many “queued” rows flip to “sent” or “failed” (70/30 split).
 - If any message “failed,” the logger will retry up to 5 times, with a 1-minute backoff.
@@ -177,17 +177,12 @@ If I had two more days, I would:
 - Train a simple ML model on past campaigns to predict which leads are most likely to convert (based on response times, interest area, etc.).
 - Highlight high-priority leads in the dashboard.
 
-**Webhook for Real Replies**
-- Replace the “mock reply” logic with a real webhook endpoint to capture actual WhatsApp replies (via Twilio).
-- Automatically parse and categorize replies (interested / not interested / need more info).
 
 **Robust Scheduling & Cron Jobs**
 - Allow campaigns to be scheduled for the future (e.g., “Send at 9 AM tomorrow”).
 - Deploy this system on a server or cloud service so the background thread runs reliably 24/7.
 
-**Integration with CRM**
-- Connect to HubSpot or Salesforce so every lead and their WhatsApp conversation appears in a centralized CRM dashboard.
-- Automate “Create a Contact” and “Add Note” steps when a reply is received.
+
 
 **In Summary**
 
